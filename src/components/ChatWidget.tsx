@@ -166,7 +166,6 @@ export function ChatWidget({
   return (
     <>
       {/* Chat Button - Floating */}
-      {/* Chat Button - Floating */}
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
@@ -186,11 +185,11 @@ export function ChatWidget({
             <img
               src={avatarImage}
               alt={chatbotName}
-              className={`${size === "large" ? "h-22 w-22" : size === "small" ? "h-20 w-20" : "h-18 w-18"} rounded-full border-2 border-white object-cover relative z-10`}
+              className={`${size === "large" ? "h-16 w-16" : size === "small" ? "h-10 w-10" : "h-14 w-14"} rounded-full border-2 border-white object-cover relative z-10`}
             />
           ) : (
             <svg
-              className={`${size === "large" ? "h-16 w-16" : size === "small" ? "h-6 w-6" : "h-8 w-8"} text-white relative z-10`}
+              className={`${size === "large" ? "h-12 w-12" : size === "small" ? "h-8 w-8" : "h-10 w-10"} text-white relative z-10`}
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
