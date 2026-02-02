@@ -16,6 +16,7 @@ interface ChatWidgetProps {
   avatarImage?: string;
   welcomeMessage?: string;
   placeholderText?: string;
+  size?: string;
 }
 
 export function ChatWidget({
@@ -25,6 +26,7 @@ export function ChatWidget({
   avatarImage,
   welcomeMessage = "👋 Hi! Wie kann ich dir helfen?",
   placeholderText = "Schreibe eine Nachricht...",
+  size = "normal",
 }: ChatWidgetProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
@@ -145,13 +147,22 @@ export function ChatWidget({
     });
   };
 
+  // Size configurations
+  const sizeConfigs: Record<string, { width: string; height: string; buttonSize: string }> = {
+    small: { width: "w-[360px]", height: "h-[500px]", buttonSize: "h-14 w-14" },
+    normal: { width: "w-[420px]", height: "h-[650px]", buttonSize: "h-16 w-16" },
+    large: { width: "w-[480px]", height: "h-[750px]", buttonSize: "h-20 w-20" },
+  };
+
+  const currentSize = sizeConfigs[size] || sizeConfigs.normal;
+
   return (
     <>
       {/* Chat Button - Floating */}
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
-          className="group relative flex h-16 w-16 items-center justify-center rounded-full shadow-2xl transition-all hover:scale-110 active:scale-95"
+          className={`group relative flex ${currentSize.buttonSize} items-center justify-center rounded-full shadow-2xl transition-all hover:scale-110 active:scale-95`}
           style={{
             background: `linear-gradient(135deg, ${color} 0%, ${color}dd 100%)`,
           }}
@@ -167,11 +178,11 @@ export function ChatWidget({
             <img
               src={avatarImage}
               alt={chatbotName}
-              className="h-12 w-12 rounded-full border-2 border-white object-cover"
+              className={`${size === 'large' ? 'h-14 w-14' : size === 'small' ? 'h-10 w-10' : 'h-12 w-12'} rounded-full border-2 border-white object-cover relative z-10`}
             />
           ) : (
             <svg
-              className="h-8 w-8 text-white"
+              className={`${size === 'large' ? 'h-10 w-10' : size === 'small' ? 'h-6 w-6' : 'h-8 w-8'} text-white relative z-10`}
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -199,7 +210,7 @@ export function ChatWidget({
 
       {/* Chat Window */}
       {isOpen && (
-        <div className="flex h-[600px] w-[400px] flex-col rounded-3xl border border-zinc-200/50 bg-white shadow-2xl backdrop-blur-xl dark:border-zinc-800/50 dark:bg-zinc-900/95 overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-300">
+        <div className={`flex ${currentSize.height} ${currentSize.width} flex-col rounded-3xl border border-zinc-200/50 bg-white shadow-2xl backdrop-blur-xl dark:border-zinc-800/50 dark:bg-zinc-900/95 overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-300`}>
           {/* Header - Glassmorphism Style */}
           <div
             className="relative flex items-center gap-4 p-5 backdrop-blur-xl border-b border-white/10"
@@ -385,7 +396,7 @@ export function ChatWidget({
                     }`}>
                       <ReactMarkdown
                         components={{
-                          a: ({ node, ...props }) => (
+                          a: ({ ...props }) => (
                             <a
                               {...props}
                               className="font-semibold underline hover:no-underline transition-all"
@@ -394,13 +405,13 @@ export function ChatWidget({
                               rel="noopener noreferrer"
                             />
                           ),
-                          ul: ({ node, ...props }) => (
+                          ul: ({ ...props }) => (
                             <ul {...props} className="space-y-1.5 my-3" />
                           ),
-                          p: ({ node, ...props }) => (
+                          p: ({ ...props }) => (
                             <p {...props} className="leading-relaxed mb-2 last:mb-0" />
                           ),
-                          strong: ({ node, ...props }) => (
+                          strong: ({ ...props }) => (
                             <strong {...props} className="font-bold" />
                           ),
                         }}
@@ -461,9 +472,9 @@ export function ChatWidget({
                 type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                onKeyPress={handleKeyPress}
+                onKeyDown={handleKeyPress}
                 placeholder={placeholderText}
-                className="flex-1 rounded-2xl border border-zinc-200 bg-zinc-50 px-5 py-3.5 text-sm placeholder:text-zinc-400 focus:border-emerald-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-400/20 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-50 dark:placeholder:text-zinc-500 dark:focus:border-emerald-500 dark:focus:bg-zinc-800 transition-all"
+                className="flex-1 rounded-2xl border border-zinc-300 bg-white px-5 py-3.5 text-sm text-zinc-900 placeholder:text-zinc-400 focus:border-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-400/20 dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-50 dark:placeholder:text-zinc-500 dark:focus:border-emerald-500 transition-all"
                 disabled={isLoading}
               />
               <button
