@@ -186,7 +186,7 @@ export function ChatWidget({
             <img
               src={avatarImage}
               alt={chatbotName}
-              className={`${size === "large" ? "h-14 w-14" : size === "small" ? "h-10 w-10" : "h-12 w-12"} rounded-full border-2 border-white object-cover relative z-10`}
+              className={`${size === "large" ? "h-22 w-22" : size === "small" ? "h-20 w-20" : "h-18 w-18"} rounded-full border-2 border-white object-cover relative z-10`}
             />
           ) : (
             <svg
