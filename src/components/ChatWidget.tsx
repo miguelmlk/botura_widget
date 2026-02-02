@@ -190,7 +190,7 @@ export function ChatWidget({
             />
           ) : (
             <svg
-              className={`${size === "large" ? "h-10 w-10" : size === "small" ? "h-6 w-6" : "h-8 w-8"} text-white relative z-10`}
+              className={`${size === "large" ? "h-16 w-16" : size === "small" ? "h-6 w-6" : "h-8 w-8"} text-white relative z-10`}
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
