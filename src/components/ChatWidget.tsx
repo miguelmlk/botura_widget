@@ -156,7 +156,7 @@ export function ChatWidget({
     normal: {
       width: "w-[380px]",
       height: "h-[580px]",
-      buttonSize: "h-16 w-16",
+      buttonSize: "h-20 w-20",
     },
     large: { width: "w-[440px]", height: "h-[680px]", buttonSize: "h-18 w-18" },
   };
