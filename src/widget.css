@@ -2,9 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Widget Container Reset */
+/* Widget Container - KEIN all: initial! */
 #botura-chat-widget {
-  all: initial;
   font-family: system-ui, -apple-system, sans-serif;
 }
 
