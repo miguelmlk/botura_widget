@@ -282,17 +282,17 @@ export function ChatWidget({
             {/* Welcome Message - nur wenn keine Messages */}
             {messages.length === 0 && (
               <div className="flex h-full items-center justify-center text-center px-4">
-                <div className="max-w-md space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
-                  {/* Icon */}
+                <div className="max-w-sm space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-500">
+                  {/* Icon - KLEINER */}
                   <div
-                    className="mx-auto flex h-24 w-24 items-center justify-center rounded-3xl shadow-2xl backdrop-blur-sm"
+                    className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl shadow-lg backdrop-blur-sm"
                     style={{
                       background: `linear-gradient(135deg, ${color}20 0%, ${color}10 100%)`,
                       border: `2px solid ${color}30`,
                     }}
                   >
                     <svg
-                      className="h-12 w-12"
+                      className="h-8 w-8"
                       style={{ color }}
                       fill="none"
                       viewBox="0 0 24 24"
@@ -307,32 +307,31 @@ export function ChatWidget({
                     </svg>
                   </div>
 
-                  {/* Welcome Text */}
-                  <div className="space-y-3">
-                    <h3 className="text-2xl font-bold text-zinc-900 dark:text-zinc-50">
+                  {/* Welcome Text - KOMPAKTER */}
+                  <div className="space-y-2">
+                    <h3 className="text-xl font-bold text-zinc-900 dark:text-zinc-50">
                       {welcomeMessage}
                     </h3>
-                    <p className="text-base text-zinc-600 dark:text-zinc-400 leading-relaxed">
-                      Stelle mir eine Frage zu unseren Produkten, Services oder
-                      Öffnungszeiten
+                    <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-snug">
+                      Stelle mir eine Frage zu unseren Produkten oder Services
                     </p>
                   </div>
 
-                  {/* Quick Actions */}
-                  <div className="flex flex-wrap justify-center gap-2">
+                  {/* Quick Actions - KLEINER */}
+                  <div className="flex flex-wrap justify-center gap-2 pt-2">
                     <button
                       onClick={() => setInput("Öffnungszeiten?")}
-                      className="group rounded-full bg-white border border-zinc-200 px-4 py-2.5 text-sm font-medium text-zinc-700 hover:border-emerald-300 hover:bg-emerald-50 dark:bg-zinc-800 dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-700 transition-all duration-200 shadow-sm hover:shadow-md"
+                      className="rounded-full bg-white border border-zinc-200 px-3 py-2 text-xs font-medium text-zinc-700 hover:border-emerald-300 hover:bg-emerald-50 dark:bg-zinc-800 dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-700 transition-all duration-200 shadow-sm hover:shadow-md"
                     >
-                      <span className="flex items-center gap-2">
+                      <span className="flex items-center gap-1.5">
                         🕐 Öffnungszeiten
                       </span>
                     </button>
                     <button
                       onClick={() => setInput("Wo seid ihr?")}
-                      className="group rounded-full bg-white border border-zinc-200 px-4 py-2.5 text-sm font-medium text-zinc-700 hover:border-emerald-300 hover:bg-emerald-50 dark:bg-zinc-800 dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-700 transition-all duration-200 shadow-sm hover:shadow-md"
+                      className="rounded-full bg-white border border-zinc-200 px-3 py-2 text-xs font-medium text-zinc-700 hover:border-emerald-300 hover:bg-emerald-50 dark:bg-zinc-800 dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-700 transition-all duration-200 shadow-sm hover:shadow-md"
                     >
-                      <span className="flex items-center gap-2">
+                      <span className="flex items-center gap-1.5">
                         📍 Standorte
                       </span>
                     </button>
