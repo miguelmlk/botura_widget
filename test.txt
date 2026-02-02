@@ -1,0 +1,22 @@
+// CSS laden
+var link = document.createElement('link');
+link.rel = 'stylesheet';
+link.href = 'https://miguelmlk.github.io/botura_widget/widget.css?v=' + Date.now();
+document.head.appendChild(link);
+
+// Widget DIV erstellen
+var div = document.createElement('div');
+div.id = 'botura-chat-widget';
+div.setAttribute('data-chatbot-id', '4a43a3cd-879e-4a91-9fef-f55f949a4562');
+div.setAttribute('data-chatbot-name', 'abaccos');
+div.setAttribute('data-color', '#10b981');
+div.setAttribute('data-api-url', 'http://localhost:8000');
+div.setAttribute('data-position', 'bottom-right');
+div.setAttribute('data-size', 'normal');
+document.body.appendChild(div);
+
+// Widget JS laden
+var script = document.createElement('script');
+script.src = 'https://miguelmlk.github.io/botura_widget/widget.js?v=' + Date.now();
+script.async = true;
+document.body.appendChild(script);
