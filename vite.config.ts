@@ -4,9 +4,8 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
   plugins: [react()],
   define: {
-    "process.env.NODE_ENV": JSON.stringify("production"),
-    "process.env": {},
-    global: "window",
+    "process.env": "{}",
+    global: "globalThis",
   },
   build: {
     lib: {
@@ -22,5 +21,6 @@ export default defineConfig({
       },
     },
     cssCodeSplit: false,
+    minify: "terser",
   },
 });
