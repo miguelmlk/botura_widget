@@ -30,7 +30,7 @@ function mountWidget() {
   // Setze API URL global
   (window as any).BOTURA_API_URL = apiUrl;
 
-  // Styling basierend auf Position
+  // Styling basierend auf Position - NUR Position, keine Größe!
   const positionStyles: Record<string, string> = {
     "bottom-right": "position:fixed;bottom:20px;right:20px;z-index:9999;",
     "bottom-left": "position:fixed;bottom:20px;left:20px;z-index:9999;",
@@ -38,18 +38,10 @@ function mountWidget() {
     "top-left": "position:fixed;top:20px;left:20px;z-index:9999;",
   };
 
-  // Styling basierend auf Größe
-  const sizeStyles: Record<string, string> = {
-    small: "width:320px;height:500px;",
-    normal: "width:400px;height:600px;",
-    large: "width:480px;height:700px;",
-  };
-
-  // Wende Styles an
+  // Wende NUR Position an
   widgetElement.setAttribute(
     "style",
-    (positionStyles[position] || positionStyles["bottom-right"]) +
-    (sizeStyles[size] || sizeStyles["normal"])
+    positionStyles[position] || positionStyles["bottom-right"]
   );
 
   console.log("✅ Botura Widget mounting with:", {
@@ -61,7 +53,7 @@ function mountWidget() {
     size
   });
 
-  // Render das Widget
+  // Render das Widget MIT size prop
   const root = createRoot(widgetElement);
   root.render(
     <ChatWidget
@@ -71,6 +63,7 @@ function mountWidget() {
       avatarImage={avatarImage}
       welcomeMessage={welcomeMessage}
       placeholderText={placeholderText}
+      size={size}
     />
   );
 }

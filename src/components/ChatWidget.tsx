@@ -61,7 +61,7 @@ export function ChatWidget({
 
     const userMessage = input.trim();
     const timestamp = new Date().toISOString();
-    
+
     setInput("");
     setIsLoading(true);
 
@@ -85,7 +85,7 @@ export function ChatWidget({
             message: userMessage,
             conversation_id: conversationId,
           }),
-        }
+        },
       );
 
       if (!response.ok) {
@@ -97,10 +97,10 @@ export function ChatWidget({
       // Bot response hinzufügen
       setMessages((prev) => [
         ...prev,
-        { 
-          role: "assistant", 
+        {
+          role: "assistant",
           content: data.response,
-          timestamp: new Date().toISOString()
+          timestamp: new Date().toISOString(),
         },
       ]);
 
@@ -111,7 +111,7 @@ export function ChatWidget({
       if (typeof window !== "undefined") {
         localStorage.setItem(
           `chat_conversation_${chatbotId}`,
-          newConversationId
+          newConversationId,
         );
       }
     } catch (error) {
@@ -122,7 +122,7 @@ export function ChatWidget({
           role: "assistant",
           content:
             "Entschuldigung, es gab einen Fehler. Bitte versuche es erneut.",
-          timestamp: new Date().toISOString()
+          timestamp: new Date().toISOString(),
         },
       ]);
     } finally {
@@ -141,23 +141,31 @@ export function ChatWidget({
   const formatTime = (timestamp?: string) => {
     if (!timestamp) return "";
     const date = new Date(timestamp);
-    return date.toLocaleTimeString("de-DE", { 
-      hour: "2-digit", 
-      minute: "2-digit" 
+    return date.toLocaleTimeString("de-DE", {
+      hour: "2-digit",
+      minute: "2-digit",
     });
   };
 
   // Size configurations
-  const sizeConfigs: Record<string, { width: string; height: string; buttonSize: string }> = {
-    small: { width: "w-[360px]", height: "h-[500px]", buttonSize: "h-14 w-14" },
-    normal: { width: "w-[420px]", height: "h-[650px]", buttonSize: "h-16 w-16" },
-    large: { width: "w-[480px]", height: "h-[750px]", buttonSize: "h-20 w-20" },
+  const sizeConfigs: Record<
+    string,
+    { width: string; height: string; buttonSize: string }
+  > = {
+    small: { width: "w-[340px]", height: "h-[480px]", buttonSize: "h-14 w-14" },
+    normal: {
+      width: "w-[380px]",
+      height: "h-[580px]",
+      buttonSize: "h-16 w-16",
+    },
+    large: { width: "w-[440px]", height: "h-[680px]", buttonSize: "h-18 w-18" },
   };
 
   const currentSize = sizeConfigs[size] || sizeConfigs.normal;
 
   return (
     <>
+      {/* Chat Button - Floating */}
       {/* Chat Button - Floating */}
       {!isOpen && (
         <button
@@ -168,21 +176,21 @@ export function ChatWidget({
           }}
         >
           {/* Pulsing Ring Animation */}
-          <div 
+          <div
             className="absolute inset-0 rounded-full animate-ping opacity-20"
             style={{ backgroundColor: color }}
           />
-          
+
           {/* Avatar or Icon */}
           {avatarImage ? (
             <img
               src={avatarImage}
               alt={chatbotName}
-              className={`${size === 'large' ? 'h-14 w-14' : size === 'small' ? 'h-10 w-10' : 'h-12 w-12'} rounded-full border-2 border-white object-cover relative z-10`}
+              className={`${size === "large" ? "h-14 w-14" : size === "small" ? "h-10 w-10" : "h-12 w-12"} rounded-full border-2 border-white object-cover relative z-10`}
             />
           ) : (
             <svg
-              className={`${size === 'large' ? 'h-10 w-10' : size === 'small' ? 'h-6 w-6' : 'h-8 w-8'} text-white relative z-10`}
+              className={`${size === "large" ? "h-10 w-10" : size === "small" ? "h-6 w-6" : "h-8 w-8"} text-white relative z-10`}
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -195,22 +203,14 @@ export function ChatWidget({
               />
             </svg>
           )}
-
-          {/* Notification Badge (optional) */}
-          {messages.length === 0 && (
-            <div 
-              className="absolute -top-1 -right-1 h-5 w-5 rounded-full border-2 border-white flex items-center justify-center text-xs font-bold text-white animate-bounce"
-              style={{ backgroundColor: color }}
-            >
-              !
-            </div>
-          )}
         </button>
       )}
 
       {/* Chat Window */}
       {isOpen && (
-        <div className={`flex ${currentSize.height} ${currentSize.width} flex-col rounded-3xl border border-zinc-200/50 bg-white shadow-2xl backdrop-blur-xl dark:border-zinc-800/50 dark:bg-zinc-900/95 overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-300`}>
+        <div
+          className={`flex ${currentSize.height} ${currentSize.width} flex-col rounded-3xl border border-zinc-200/50 bg-white shadow-2xl backdrop-blur-xl dark:border-zinc-800/50 dark:bg-zinc-900/95 overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-300`}
+        >
           {/* Header - Glassmorphism Style */}
           <div
             className="relative flex items-center gap-4 p-5 backdrop-blur-xl border-b border-white/10"
@@ -220,13 +220,13 @@ export function ChatWidget({
           >
             {/* Animated Background Blobs */}
             <div className="absolute inset-0 overflow-hidden">
-              <div 
+              <div
                 className="absolute -top-10 -left-10 w-40 h-40 rounded-full blur-3xl opacity-30 animate-pulse"
                 style={{ background: `${color}` }}
               />
-              <div 
+              <div
                 className="absolute -bottom-10 -right-10 w-40 h-40 rounded-full blur-3xl opacity-20 animate-pulse"
-                style={{ background: `${color}`, animationDelay: '1s' }}
+                style={{ background: `${color}`, animationDelay: "1s" }}
               />
             </div>
 
@@ -243,7 +243,7 @@ export function ChatWidget({
                   {chatbotName.charAt(0).toUpperCase()}
                 </div>
               )}
-              
+
               {/* Online Status Indicator */}
               <div className="absolute bottom-0 right-0 h-4 w-4 rounded-full bg-green-400 border-2 border-white shadow-sm animate-pulse" />
             </div>
@@ -280,7 +280,6 @@ export function ChatWidget({
 
           {/* Messages Area */}
           <div className="flex-1 space-y-6 overflow-y-auto p-6 bg-gradient-to-b from-zinc-50/50 via-white to-zinc-50/30 dark:from-zinc-900/50 dark:via-zinc-950 dark:to-zinc-900/50">
-            
             {/* Welcome Message - nur wenn keine Messages */}
             {messages.length === 0 && (
               <div className="flex h-full items-center justify-center text-center px-4">
@@ -288,9 +287,9 @@ export function ChatWidget({
                   {/* Icon */}
                   <div
                     className="mx-auto flex h-24 w-24 items-center justify-center rounded-3xl shadow-2xl backdrop-blur-sm"
-                    style={{ 
+                    style={{
                       background: `linear-gradient(135deg, ${color}20 0%, ${color}10 100%)`,
-                      border: `2px solid ${color}30`
+                      border: `2px solid ${color}30`,
                     }}
                   >
                     <svg
@@ -351,8 +350,9 @@ export function ChatWidget({
                   msg.role === "user" ? "justify-end" : "justify-start"
                 }`}
               >
-                <div className={`flex gap-3 max-w-[85%] ${msg.role === "user" ? "flex-row-reverse" : "flex-row"}`}>
-                  
+                <div
+                  className={`flex gap-3 max-w-[85%] ${msg.role === "user" ? "flex-row-reverse" : "flex-row"}`}
+                >
                   {/* Avatar (nur bei Assistant) */}
                   {msg.role === "assistant" && (
                     <div className="flex-shrink-0">
@@ -363,7 +363,7 @@ export function ChatWidget({
                           className="h-8 w-8 rounded-full border-2 border-zinc-200 dark:border-zinc-700 object-cover"
                         />
                       ) : (
-                        <div 
+                        <div
                           className="flex h-8 w-8 items-center justify-center rounded-full text-sm font-bold text-white"
                           style={{ backgroundColor: color }}
                         >
@@ -389,18 +389,22 @@ export function ChatWidget({
                     }
                   >
                     {/* Markdown Content */}
-                    <div className={`prose prose-sm max-w-none ${
-                      msg.role === "user" 
-                        ? "prose-invert" 
-                        : "dark:prose-invert"
-                    }`}>
+                    <div
+                      className={`prose prose-sm max-w-none ${
+                        msg.role === "user"
+                          ? "prose-invert"
+                          : "dark:prose-invert"
+                      }`}
+                    >
                       <ReactMarkdown
                         components={{
                           a: ({ ...props }) => (
                             <a
                               {...props}
                               className="font-semibold underline hover:no-underline transition-all"
-                              style={{ color: msg.role === "user" ? "white" : color }}
+                              style={{
+                                color: msg.role === "user" ? "white" : color,
+                              }}
                               target="_blank"
                               rel="noopener noreferrer"
                             />
@@ -409,7 +413,10 @@ export function ChatWidget({
                             <ul {...props} className="space-y-1.5 my-3" />
                           ),
                           p: ({ ...props }) => (
-                            <p {...props} className="leading-relaxed mb-2 last:mb-0" />
+                            <p
+                              {...props}
+                              className="leading-relaxed mb-2 last:mb-0"
+                            />
                           ),
                           strong: ({ ...props }) => (
                             <strong {...props} className="font-bold" />
@@ -420,9 +427,13 @@ export function ChatWidget({
                       </ReactMarkdown>
                     </div>
 
-                    <div className="mt-2 opacity-0 group-hover:opacity-100 transition-opacity text-xs"
-                      style={{ 
-                        color: msg.role === "user" ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.4)" 
+                    <div
+                      className="mt-2 opacity-0 group-hover:opacity-100 transition-opacity text-xs"
+                      style={{
+                        color:
+                          msg.role === "user"
+                            ? "rgba(255,255,255,0.7)"
+                            : "rgba(0,0,0,0.4)",
                       }}
                     >
                       {formatTime(msg.timestamp)}
@@ -443,7 +454,7 @@ export function ChatWidget({
                       className="h-8 w-8 rounded-full border-2 border-zinc-200 dark:border-zinc-700 object-cover"
                     />
                   ) : (
-                    <div 
+                    <div
                       className="flex h-8 w-8 items-center justify-center rounded-full text-sm font-bold text-white"
                       style={{ backgroundColor: color }}
                     >
@@ -451,12 +462,27 @@ export function ChatWidget({
                     </div>
                   )}
                 </div>
-                
+
                 <div className="rounded-2xl rounded-bl-sm bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 px-5 py-4 shadow-sm">
                   <div className="flex items-center gap-1.5">
-                    <div className="h-2 w-2 rounded-full animate-bounce" style={{ backgroundColor: color, animationDelay: '0ms' }} />
-                    <div className="h-2 w-2 rounded-full animate-bounce" style={{ backgroundColor: color, animationDelay: '150ms' }} />
-                    <div className="h-2 w-2 rounded-full animate-bounce" style={{ backgroundColor: color, animationDelay: '300ms' }} />
+                    <div
+                      className="h-2 w-2 rounded-full animate-bounce"
+                      style={{ backgroundColor: color, animationDelay: "0ms" }}
+                    />
+                    <div
+                      className="h-2 w-2 rounded-full animate-bounce"
+                      style={{
+                        backgroundColor: color,
+                        animationDelay: "150ms",
+                      }}
+                    />
+                    <div
+                      className="h-2 w-2 rounded-full animate-bounce"
+                      style={{
+                        backgroundColor: color,
+                        animationDelay: "300ms",
+                      }}
+                    />
                   </div>
                 </div>
               </div>
@@ -482,9 +508,10 @@ export function ChatWidget({
                 disabled={!input.trim() || isLoading}
                 className="rounded-2xl px-5 py-3.5 text-white shadow-lg hover:shadow-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed active:scale-95 flex items-center justify-center min-w-[50px]"
                 style={{
-                  background: input.trim() && !isLoading
-                    ? `linear-gradient(135deg, ${color} 0%, ${color}dd 100%)`
-                    : '#94a3b8',
+                  background:
+                    input.trim() && !isLoading
+                      ? `linear-gradient(135deg, ${color} 0%, ${color}dd 100%)`
+                      : "#94a3b8",
                 }}
               >
                 {isLoading ? (
