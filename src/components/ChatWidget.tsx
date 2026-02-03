@@ -318,24 +318,6 @@ export function ChatWidget({
                   </div>
 
                   {/* Quick Actions - KLEINER */}
-                  <div className="flex flex-wrap justify-center gap-2 pt-2">
-                    <button
-                      onClick={() => setInput("Öffnungszeiten?")}
-                      className="rounded-full bg-white border border-zinc-200 px-3 py-2 text-xs font-medium text-zinc-700 hover:border-emerald-300 hover:bg-emerald-50 dark:bg-zinc-800 dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-700 transition-all duration-200 shadow-sm hover:shadow-md"
-                    >
-                      <span className="flex items-center gap-1.5">
-                        🕐 Öffnungszeiten
-                      </span>
-                    </button>
-                    <button
-                      onClick={() => setInput("Wo seid ihr?")}
-                      className="rounded-full bg-white border border-zinc-200 px-3 py-2 text-xs font-medium text-zinc-700 hover:border-emerald-300 hover:bg-emerald-50 dark:bg-zinc-800 dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-700 transition-all duration-200 shadow-sm hover:shadow-md"
-                    >
-                      <span className="flex items-center gap-1.5">
-                        📍 Standorte
-                      </span>
-                    </button>
-                  </div>
                 </div>
               </div>
             )}
